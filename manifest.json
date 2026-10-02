@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "manaba To Google Tasks Sync",
+  "version": "1.0.0",
+  "description": "中央大学manabaの未提出課題をGoogle Tasksに同期します",
+  "key": "": [
+    "identity",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://room.chuo-u.ac.jp/*",
+    "https://tasks.googleapis.com/*"
+  ],
+  "oauth2": {
+    "client_id": "",
+    "scopes": [
+	 "https://www.googleapis.com/auth/tasks"
+    ]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>manaba To Google Tasks Sync</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="header">
+      <div class="header-title-wrap">
+        <h1 class="header-title">manaba To Google Tasks</h1>
+        <span class="badge-tag">中央大学</span>
+      </div>
+    </header>
+
+    <!-- 1. LOADING 状態 -->
+    <div id="view-loading" class="view">
+      <div class="spinner"></div>
+      <p class="status-text">manabaの課題を確認中...</p>
+    </div>
+
+    <!-- 2. INVALID_URL 状態 -->
+    <div id="view-invalid-url" class="view hidden">
+      <div class="state-icon warning-icon">⚠️</div>
+      <h2 class="state-title">対象外のページです</h2>
+      <p class="state-description">中央大学manabaの「未提出課題一覧」画面を開いた状態で本拡張機能を起動してください。</p>
+      <a href="https://room.chuo-u.ac.jp/ct/home_library_query" target="_blank" class="action-link-btn">未提出課題一覧を開く</a>
+    </div>
+
+    <!-- 3. EMPTY 状態 -->
+    <div id="view-empty" class="view hidden">
+      <div class="state-icon success-icon">🎉</div>
+      <h2 class="state-title">未提出の課題はありません</h2>
+      <p class="state-description">現在、manaba上に同期対象の未提出課題は見つかりませんでした。</p>
+    </div>
+
+    <!-- 4. ERROR 状態 -->
+    <div id="view-error" class="view hidden">
+      <div class="state-icon error-icon">❌</div>
+      <h2 class="state-title">エラーが発生しました</h2>
+      <p id="error-message-text" class="error-message-box"></p>
+      <button id="btn-reload" class="secondary-btn">再読み込み</button>
+    </div>
+
+    <!-- 5. LIST & SYNCING 状態 -->
+    <div id="view-list" class="view hidden">
+      <div class="toolbar">
+        <label class="select-all-label">
+          <input type="checkbox" id="check-select-all" checked>
+          <span class="checkbox-text">すべて選択</span>
+        </label>
+        <span id="selected-count-badge" class="count-badge">0 / 0 件選択中</span>
+      </div>
+
+      <div class="list-container">
+        <ul id="assignment-list" class="assignment-list"></ul>
+      </div>
+
+      <footer class="footer">
+        <div id="sync-progress-area" class="sync-progress-area hidden">
+          <div class="progress-bar-bg">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          </div>
+          <p id="progress-status-text" class="progress-status-text">同期準備中...</p>
+        </div>
+        <div id="sync-summary-banner" class="sync-summary-banner hidden"></div>
+        <button id="btn-sync" class="primary-btn">選択した課題をGoogle Tasksに追加</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
